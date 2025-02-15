@@ -1,0 +1,9 @@
+def insert_at_index(arr, element, index):
+    new_arr = arr[:index] + [element] + arr[index:]
+    return new_arr
+
+arr = [10, 20, 30, 40, 50]
+element_to_insert = 25
+index = 2
+arr = insert_at_index(arr, element_to_insert, index)
+print("Array after insertion:", arr)

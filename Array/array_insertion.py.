@@ -1,9 +1,21 @@
-def insert_at_index(arr, element, index):
-    new_arr = arr[:index] + [element] + arr[index:]
-    return new_arr
+def insert(LA, K, ITEM):
+    if K < 0 or K >= len(LA):
+        return "K is out of range."
+    if ITEM <= 0:
+        return "Item must be a positive integer."
+    if ITEM < LA[K]:
+        LA[K] = ITEM
+        return LA
+    else:
+        return f"ITEM at index {K} is greater than user's entered ITEM."
 
-arr = [10, 20, 30, 40, 50]
-element_to_insert = 25
-index = 2
-arr = insert_at_index(arr, element_to_insert, index)
-print("Array after insertion:", arr)
+LA = [2, 5, 8, 10]
+K = 2
+ITEM = 6
+result = insert(LA, K, ITEM)
+print(result)
+
+K = 1
+ITEM = 7
+result = insert(LA, K, ITEM)
+print(result)

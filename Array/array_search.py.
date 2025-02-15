@@ -1,0 +1,14 @@
+def find_index(arr, value):
+    for i in range(len(arr)):
+        if arr[i] == value:
+            return i
+    return -1
+
+arr = [10, 20, 30, 40, 50]
+value = 30
+index = find_index(arr, value)
+
+if index >= 0:
+    print(f"Value {value} found at index: {index}")
+else:
+    print(f"Value {value} not found in the array.")

@@ -1,0 +1,85 @@
+class Node:
+    def __init__(self, data=""):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class TextEditor:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.cursor = None
+
+    def add_text(self, text):
+        for char in text:
+            new_node = Node(char)
+            if self.cursor is None:
+                if self.head is None:
+                    self.head = self.tail = new_node
+                else:
+                    new_node.next = self.head
+                    self.head.prev = new_node
+                    self.head = new_node
+                self.cursor = new_node
+            else:
+                new_node.prev = self.cursor
+                new_node.next = self.cursor.next
+                if self.cursor.next:
+                    self.cursor.next.prev = new_node
+                else:
+                    self.tail = new_node
+                self.cursor.next = new_node
+                self.cursor = new_node
+
+    def delete_text(self):
+        if self.cursor is None:
+            return
+        if self.cursor == self.head:
+            if self.cursor.next:
+                self.cursor.next.prev = None
+            self.head = self.cursor.next
+            self.cursor = self.head
+        elif self.cursor == self.tail:
+            self.tail = self.cursor.prev
+            self.tail.next = None
+            self.cursor = self.tail
+        else:
+            self.cursor.prev.next = self.cursor.next
+            self.cursor.next.prev = self.cursor.prev
+            self.cursor = self.cursor.prev
+
+    def move_cursor_left(self):
+        if self.cursor and self.cursor.prev:
+            self.cursor = self.cursor.prev
+
+    def move_cursor_right(self):
+        if self.cursor and self.cursor.next:
+            self.cursor = self.cursor.next
+
+    def display(self):
+        current = self.head
+        text = ""
+        while current:
+            if current == self.cursor:
+                text += f"[{current.data}]"
+            else:
+                text += current.data
+            current = current.next
+        print("Text:", text)
+
+if __name__ == "__main__":
+    editor = TextEditor()
+    while True:
+        command = input("\nEnter command: ").strip().lower()
+        if command.startswith("add "):
+            editor.add_text(command[4:])
+        elif command == "delete":
+            editor.delete_text()
+        elif command == "left":
+            editor.move_cursor_left()
+        elif command == "right":
+            editor.move_cursor_right()
+        elif command == "display":
+            editor.display()
+        elif command == "exit":
+            break

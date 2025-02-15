@@ -1,0 +1,37 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_at_end(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+
+if __name__ == "__main__":
+    dll = DoublyLinkedList()
+    dll.insert_at_end(10)
+    dll.insert_at_end(20)
+    dll.insert_at_end(30)
+    dll.insert_at_end(40)
+
+    print("Doubly Linked List:")
+    dll.display()

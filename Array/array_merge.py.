@@ -1,0 +1,7 @@
+def merge_arrays(arr1, arr2):
+    return arr1 + arr2
+
+arr1 = [10, 20, 30]
+arr2 = [40, 50, 60]
+merged_array = merge_arrays(arr1, arr2)
+print("Merged array:", merged_array)

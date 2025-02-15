@@ -1,0 +1,8 @@
+def delete_at_index(arr, index):
+    new_arr = arr[:index] + arr[index+1:]
+    return new_arr
+
+arr = [10, 20, 30, 40, 50]
+index = 2
+arr = delete_at_index(arr, index)
+print("Array after deletion:", arr)
